@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AW Games</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">AW Games</a>
+            <div class="nav-links">
+                <a href="#games">游戏库</a>
+                <a href="https://github.com/aw-gd/AWGames" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        
+        <header class="hero">
+            <div class="hero-content">
+                <img src="assets/images/logo.png" alt="AW Games Logo" class="logo">
+                <h1 class="hero-title">AW Games</h1>
+                <p class="subtitle">Select a game to play or download.</p>
+                <div class="tech-line"></div>
+            </div>
+        </header>
+
+        <section class="filter-section">
+            <div class="search-container">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="search-input" placeholder="搜寻游戏..." autocomplete="off">
+            </div>
+            
+            <div class="category-tabs" id="category-tabs">
+                <button class="tab-btn active" data-filter="全部">全部</button>
+                <button class="tab-btn" data-filter="竞速">竞速</button>
+            </div>
+        </section>
+
+        <main class="game-grid" id="games">
+            
+            <!-- 游戏：Racecar -->
+            <div class="game-card" data-title="Racecar" data-category="竞速">
+                <!-- 替换为你的图片，如果图片没准备好，会显示 alt 文字 -->
+                <img src="assets/images/racecar.png" alt="Racecar Cover" class="card-cover-img">
+                
+                <div class="card-content">
+                    <h2>Racecar</h2>
+                    <p>体验极致的竞速快感。仅提供下载体验。</p>
+                    <div class="actions">
+                        <a href="info.html" class="btn btn-secondary">游戏资讯</a>
+                        <a href="downloads/racecar.zip" download class="btn btn-primary">下载游戏</a>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <div class="empty-state" id="empty-state">
+            <p>没有找到相关游戏</p>
+        </div>
+
+        <footer class="site-footer">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>AW Games</h3>
+                    <p class="author-name">作者：AW</p>
+                    <p class="author-desc">独立游戏开发者。热爱编程与创造，致力于制作有趣、简单、纯粹的小游戏。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>导航</h4>
+                    <ul class="footer-list">
+                        <li><a href="#">返回顶部</a></li>
+                        <li><a href="about.html">关于我</a></li>
+                        <li><a href="contact.html">联系作者</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>互动</h4>
+                    <ul class="footer-list">
+                        <li><a href="survey.html">问卷调查 (反馈)</a></li>
+                        <li><a href="https://github.com/aw-gd/AWGames" target="_blank">GitHub 仓库 ↗</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AW Games. All rights reserved.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('search-input');
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const gameCards = document.querySelectorAll('.game-card');
+            const emptyState = document.getElementById('empty-state');
+
+            let currentCategory = '全部';
+            let currentSearch = '';
+
+            function filterGames() {
+                let visibleCount = 0;
+
+                gameCards.forEach(card => {
+                    const title = card.getAttribute('data-title').toLowerCase();
+                    const category = card.getAttribute('data-category');
+                    
+                    const matchCategory = (currentCategory === '全部' || category === currentCategory);
+                    const matchSearch = title.includes(currentSearch.toLowerCase());
+
+                    if (matchCategory && matchSearch) {
+                        card.style.display = 'flex';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+            }
+
+            searchInput.addEventListener('input', (e) => {
+                currentSearch = e.target.value.trim();
+                filterGames();
+            });
+
+            tabButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    tabButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentCategory = btn.getAttribute('data-filter');
+                    filterGames();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

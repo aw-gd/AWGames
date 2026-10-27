@@ -1,0 +1,389 @@
+/* ================= 全局重置与基础设置 ================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #fbfbfd;
+    color: #1d1d1f;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ================= 顶部导航栏 ================= */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-brand {
+    text-decoration: none;
+    color: #1d1d1f;
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #424245;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.nav-links a:hover { color: #000; }
+
+/* ================= 页面主体包裹层 ================= */
+.page-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ================= 头部 Hero 区域 ================= */
+.hero {
+    position: relative;
+    background: radial-gradient(circle at 50% 50%, rgba(0, 113, 227, 0.05) 0%, #ffffff 60%);
+    padding: 100px 20px 80px 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    width: 280px;
+    max-width: 80%;
+    height: auto;
+    margin-bottom: 30px;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.4s ease;
+    filter: drop-shadow(0 15px 30px rgba(0, 113, 227, 0.25));
+}
+
+.logo:hover {
+    transform: scale(1.02);
+    filter: drop-shadow(0 20px 40px rgba(0, 113, 227, 0.4));
+}
+
+.hero-title {
+    font-size: 64px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    margin-bottom: 12px;
+    color: #1d1d1f;
+}
+
+.subtitle {
+    font-size: 20px;
+    color: #86868b;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.tech-line {
+    margin-top: 30px;
+    width: 60px;
+    height: 3px;
+    background-color: #0071e3;
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(0, 113, 227, 0.5);
+}
+
+/* ================= 搜索与分类筛选区 ================= */
+.filter-section {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.search-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: #86868b;
+}
+
+#search-input {
+    width: 100%;
+    padding: 16px 20px 16px 50px;
+    font-size: 16px;
+    font-family: inherit;
+    background-color: #f5f5f7;
+    border: 2px solid transparent;
+    border-radius: 99px;
+    color: #1d1d1f;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#search-input::placeholder { color: #86868b; }
+
+#search-input:focus {
+    background-color: #ffffff;
+    border-color: #0071e3;
+    box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
+}
+
+.category-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.tab-btn {
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    color: #424245;
+    background-color: #ffffff;
+    border: 1px solid #d2d2d7;
+    border-radius: 99px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tab-btn:hover { background-color: #f5f5f7; }
+
+.tab-btn.active {
+    background-color: #0071e3;
+    color: #ffffff;
+    border-color: #0071e3;
+    box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+}
+
+/* ================= 游戏网格布局 ================= */
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto 80px auto;
+    width: 100%;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* ================= 卡片设计 ================= */
+.game-card {
+    background-color: #ffffff;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.game-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* 游戏封面图样式 */
+.card-cover-img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background-color: #e8e8ed; /* ⚠️ 加深的背景色，作为图片画框 */
+    display: block;
+}
+
+.card-content {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-content h2 {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    color: #1d1d1f;
+}
+
+.card-content p {
+    color: #86868b;
+    font-size: 16px;
+    margin-bottom: 32px;
+    flex-grow: 1;
+}
+
+/* ================= 按钮组 ================= */
+.actions {
+    display: flex;
+    gap: 16px;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 99px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.2s ease;
+    flex: 1;
+}
+
+.btn-primary {
+    background-color: #0071e3;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #0077ed;
+    box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+}
+
+.btn-secondary {
+    background-color: #e8e8ed;
+    color: #1d1d1f;
+}
+
+.btn-secondary:hover { background-color: #d2d2d7; }
+
+/* ================= 空状态提示 ================= */
+.empty-state {
+    display: none;
+    text-align: center;
+    padding: 60px 20px;
+    color: #86868b;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* ================= 底部信息栏 ================= */
+.site-footer {
+    background-color: #000000;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 60px 20px 20px 20px;
+    margin-top: auto;
+    color: #a1a1a6;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr; 
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.footer-col h3, .footer-col h4 {
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+}
+
+.footer-col h3 { font-size: 20px; }
+.footer-col h4 { font-size: 14px; }
+
+.author-name {
+    color: #f5f5f7;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.author-desc {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #86868b;
+    max-width: 300px;
+}
+
+.footer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-list li { margin-bottom: 12px; }
+
+.footer-list a {
+    color: #a1a1a6;
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s ease;
+}
+
+.footer-list a:hover { color: #ffffff; }
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-size: 12px;
+    color: #6e6e73;
+}
+
+/* ================= 响应式适配 ================= */
+@media (max-width: 768px) {
+    .footer-container { grid-template-columns: 1fr; gap: 40px; }
+}
+
+@media (max-width: 600px) {
+    .nav-links { display: none; }
+    .hero { padding: 60px 20px; }
+    .hero-title { font-size: 44px; }
+    .subtitle { font-size: 16px; }
+    .logo { width: 200px; }
+}
