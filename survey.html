@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问卷调查 - AW Games</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 针对问卷页面的专属样式 */
+        .survey-container {
+            max-width: 600px;
+            width: 100%;
+            background: #ffffff;
+            padding: 48px;
+            border-radius: 28px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            margin: 60px auto;
+        }
+
+        .survey-container h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+            color: #1d1d1f;
+            text-align: center;
+        }
+
+        .survey-container p.desc {
+            color: #86868b;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 15px;
+        }
+
+        .form-group { margin-bottom: 28px; }
+
+        .form-group label {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 12px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 15px;
+            font-family: inherit;
+            background-color: #f5f5f7;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            color: #1d1d1f;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background-color: #ffffff;
+            border-color: #0071e3;
+            box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
+        }
+
+        textarea.form-control { resize: vertical; min-height: 120px; }
+
+        .rating-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .rating-group label { margin-bottom: 0; width: 120px; }
+
+        .rating-slider {
+            flex: 1;
+            margin: 0 16px;
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #e8e8ed;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .rating-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #0071e3;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 113, 227, 0.4);
+            transition: transform 0.1s ease;
+        }
+
+        .rating-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+
+        .rating-value {
+            width: 30px;
+            text-align: right;
+            font-weight: 600;
+            color: #0071e3;
+            font-size: 15px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            font-size: 17px;
+            font-weight: 600;
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        @media (max-width: 600px) {
+            .survey-container { padding: 30px 20px; margin: 30px auto; }
+            .rating-group { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .rating-slider { margin: 8px 0; width: 100%; }
+            .rating-value { text-align: left; width: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html" class="nav-brand">AW Games</a>
+            <div class="nav-links">
+                <a href="https://github.com/aw-gd/AWGames" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        
+        <div class="survey-container">
+            <h1>游戏反馈问卷</h1>
+            <p class="desc">您的反馈对 AW 非常重要，感谢您的支持！</p>
+
+            <form id="surveyForm">
+                
+                <div class="form-group">
+                    <label for="gameSelect">选择玩了的游戏</label>
+                    <select id="gameSelect" class="form-control" required>
+                        <option value="" disabled selected>请选择一款游戏</option>
+                        <option value="Racecar">Racecar</option>
+                        <option value="Savior">Savior</option>
+                        <!-- ⚠️ 新增：Starrail -->
+                        <option value="Starrail">Starrail</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="playTime">填写游玩时长</label>
+                    <input type="text" id="playTime" class="form-control" placeholder="例如：2 小时 / 每天玩半小时" required>
+                </div>
+
+                <div class="form-group" style="margin-top: 32px;">
+                    <label style="margin-bottom: 20px; font-size: 18px;">游戏评分 (1 - 10分)</label>
+                    
+                    <div class="rating-group">
+                        <label for="scoreOverall">整体评分</label>
+                        <input type="range" id="scoreOverall" class="rating-slider" min="1" max="10" value="8" oninput="document.getElementById('valOverall').innerText = this.value">
+                        <span class="rating-value" id="valOverall">8</span>
+                    </div>
+
+                    <div class="rating-group">
+                        <label for="scoreGameplay">玩法评分</label>
+                        <input type="range" id="scoreGameplay" class="rating-slider" min="1" max="10" value="8" oninput="document.getElementById('valGameplay').innerText = this.value">
+                        <span class="rating-value" id="valGameplay">8</span>
+                    </div>
+
+                    <div class="rating-group">
+                        <label for="scoreContent">内容评分</label>
+                        <input type="range" id="scoreContent" class="rating-slider" min="1" max="10" value="8" oninput="document.getElementById('valContent').innerText = this.value">
+                        <span class="rating-value" id="valContent">8</span>
+                    </div>
+
+                    <div class="rating-group">
+                        <label for="scoreMusic">音乐评分</label>
+                        <input type="range" id="scoreMusic" class="rating-slider" min="1" max="10" value="8" oninput="document.getElementById('valMusic').innerText = this.value">
+                        <span class="rating-value" id="valMusic">8</span>
+                    </div>
+
+                    <div class="rating-group">
+                        <label for="scoreSFX">音效评分</label>
+                        <input type="range" id="scoreSFX" class="rating-slider" min="1" max="10" value="8" oninput="document.getElementById('valSFX').innerText = this.value">
+                        <span class="rating-value" id="valSFX">8</span>
+                    </div>
+
+                    <div class="rating-group">
+                        <label for="scoreEasy">易玩程度</label>
+                        <input type="range" id="scoreEasy" class="rating-slider" min="1" max="10" value="8" oninput="document.getElementById('valEasy').innerText = this.value">
+                        <span class="rating-value" id="valEasy">8</span>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 32px;">
+                    <label for="otherFeedback">其他意见或建议</label>
+                    <textarea id="otherFeedback" class="form-control" placeholder="有任何想法、剧情讨论、Bug 反馈或建议，都可以写在这里..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary submit-btn">提交反馈</button>
+            </form>
+
+        </div>
+
+    </div> <!-- page-wrapper 结束 -->
+
+    <!-- 统一 Footer 占位符 -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        document.getElementById('surveyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const game = document.getElementById('gameSelect').value;
+            const time = document.getElementById('playTime').value;
+            
+            const overall = document.getElementById('scoreOverall').value;
+            const gameplay = document.getElementById('scoreGameplay').value;
+            const content = document.getElementById('scoreContent').value;
+            const music = document.getElementById('scoreMusic').value;
+            const sfx = document.getElementById('scoreSFX').value;
+            const easy = document.getElementById('scoreEasy').value;
+            
+            const feedback = document.getElementById('otherFeedback').value;
+
+            if (!game) {
+                alert("请选择你玩的游戏！");
+                return;
+            }
+
+            const emailSubject = encodeURIComponent(`[游戏反馈] ${game} - AW Games`);
+            
+            const emailBody = encodeURIComponent(
+                `AW 你好，\n\n以下是我的游戏体验反馈：\n\n` +
+                `【游戏名称】 ${game}\n` +
+                `【游玩时长】 ${time || '未填写'}\n\n` +
+                `=====================\n` +
+                `【评分详情】\n` +
+                `- 整体评分：${overall} 分\n` +
+                `- 玩法评分：${gameplay} 分\n` +
+                `- 内容评分：${content} 分\n` +
+                `- 音乐评分：${music} 分\n` +
+                `- 音效评分：${sfx} 分\n` +
+                `- 易玩程度：${easy} 分\n\n` +
+                `=====================\n` +
+                `【其他意见】\n` +
+                `${feedback || '无'}\n\n` +
+                `---------------------\n` +
+                `此邮件由 AW Games 问卷调查自动生成。`
+            );
+
+            window.location.href = `mailto:antw6426@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+            
+            setTimeout(() => {
+                alert("已为您生成邮件，请在弹出的邮件软件中点击发送！");
+            }, 500);
+        });
+    </script>
+    
+    <!-- 引入 Footer 脚本 -->
+    <script src="footer.js"></script>
+</body>
+</html>

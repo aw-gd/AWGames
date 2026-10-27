@@ -5,6 +5,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AW Games</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* 针对长文案做一点微调，保持排版的美观 */
+        .subtitle {
+            font-size: 18px;
+            letter-spacing: 0.02em;
+            text-transform: none;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* 针对未完工游戏的特殊按钮样式（不可点击） */
+        .btn-disabled {
+            background-color: #e8e8ed;
+            color: #86868b;
+            cursor: not-allowed;
+            border: 1px solid #d2d2d7;
+        }
+        .btn-disabled:hover {
+            background-color: #e8e8ed;
+            box-shadow: none;
+        }
+
+        /* 重新调整顶部筛选区域的布局 */
+        .filter-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            gap: 16px;
+        }
+
+        .filter-top-row .search-container {
+            margin: 0;
+            flex: 1; /* 让搜索框占据剩余空间 */
+        }
+
+        /* 状态筛选小胶囊 */
+        .status-filters {
+            display: flex;
+            gap: 8px;
+            background-color: #f5f5f7;
+            padding: 4px;
+            border-radius: 99px;
+        }
+
+        .status-btn {
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 99px;
+            border: none;
+            background: transparent;
+            color: #86868b;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .status-btn.active {
+            background-color: #ffffff;
+            color: #1d1d1f;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* 手机端适配 */
+        @media (max-width: 768px) {
+            .filter-top-row {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .status-filters {
+                width: 100%;
+                justify-content: center;
+            }
+            .status-btn {
+                flex: 1;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -12,7 +93,6 @@
         <div class="nav-content">
             <a href="index.html" class="nav-brand">AW Games</a>
             <div class="nav-links">
-                <a href="#games">游戏库</a>
                 <a href="https://github.com/aw-gd/AWGames" target="_blank">GitHub</a>
             </div>
         </div>
@@ -24,39 +104,113 @@
             <div class="hero-content">
                 <img src="assets/images/logo.png" alt="AW Games Logo" class="logo">
                 <h1 class="hero-title">AW Games</h1>
-                <p class="subtitle">Select a game to play or download.</p>
+                <p class="subtitle">Where code creates worlds, and worlds change lives.</p>
                 <div class="tech-line"></div>
             </div>
         </header>
 
         <section class="filter-section">
-            <div class="search-container">
-                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-                <input type="text" id="search-input" placeholder="搜寻游戏..." autocomplete="off">
+            
+            <!-- 第一行：搜索 + 状态切换 -->
+            <div class="filter-top-row">
+                <div class="search-container">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="search-input" placeholder="搜寻游戏..." autocomplete="off">
+                </div>
+                
+                <!-- 状态筛选器 -->
+                <div class="status-filters" id="status-filters">
+                    <button class="status-btn active" data-status="all">全部</button>
+                    <button class="status-btn" data-status="published">已发布</button>
+                    <button class="status-btn" data-status="unpublished">未发布</button>
+                </div>
             </div>
             
+            <!-- 第二行：分类标签 -->
             <div class="category-tabs" id="category-tabs">
-                <button class="tab-btn active" data-filter="全部">全部</button>
+                <button class="tab-btn active" data-filter="all">所有分类</button>
                 <button class="tab-btn" data-filter="竞速">竞速</button>
+                <button class="tab-btn" data-filter="战斗">战斗</button>
+                <button class="tab-btn" data-filter="回合制">回合制</button>
+                <button class="tab-btn" data-filter="跑酷">跑酷</button>
+                <button class="tab-btn" data-filter="剧情">剧情</button>
             </div>
         </section>
 
         <main class="game-grid" id="games">
             
-            <!-- 游戏：Racecar -->
-            <div class="game-card" data-title="Racecar" data-category="竞速">
-                <!-- 替换为你的图片，如果图片没准备好，会显示 alt 文字 -->
+            <!-- 游戏 1：Re:Zero (未完工) -->
+            <div class="game-card" data-title="Re:Zero" data-category="剧情 战斗" data-status="unpublished">
+                <img src="assets/images/rezero.png" alt="Re:Zero Cover" class="card-cover-img">
+                <div class="card-content">
+                    <h2>Re:Zero</h2>
+                    <p>《Re:从零开始的异世界生活》二创游戏，目前正在紧锣密鼓地开发中，敬请期待。</p>
+                    <div class="actions">
+                        <span class="btn btn-disabled">暂未发布</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 游戏 2：Savior (未完工) -->
+            <div class="game-card" data-title="Savior" data-category="战斗" data-status="unpublished">
+                <img src="assets/images/savior.png" alt="Savior Cover" class="card-cover-img">
+                <div class="card-content">
+                    <h2>Savior</h2>
+                    <p>2D 平面战斗游戏。目前正在优化核心手感，敬请期待。</p>
+                    <div class="actions">
+                        <span class="btn btn-disabled">暂未发布</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 游戏 3：冲，跳，射 (3D跑酷射击) -->
+            <div class="game-card" data-title="冲，跳，射 djs" data-category="跑酷 战斗 竞速" data-status="published">
+                <img src="assets/images/djs.png" alt="冲，跳，射 Cover" class="card-cover-img">
+                <div class="card-content">
+                    <h2>冲，跳，射</h2>
+                    <p>硬核 3D 跑酷，努力抵达最高处吧！</p>
+                    <div class="actions">
+                        <a href="https://drive.google.com/uc?export=download&id=1T-NZseuurfFHj-W49e1V_IjwDMbcEEYS" target="_blank" class="btn btn-primary">下载游戏</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 游戏 4：Racecar -->
+            <div class="game-card" data-title="Racecar" data-category="竞速" data-status="published">
                 <img src="assets/images/racecar.png" alt="Racecar Cover" class="card-cover-img">
-                
                 <div class="card-content">
                     <h2>Racecar</h2>
-                    <p>体验极致的竞速快感。仅提供下载体验。</p>
+                    <p>体验极致的竞速快感。</p>
                     <div class="actions">
-                        <a href="info.html" class="btn btn-secondary">游戏资讯</a>
                         <a href="downloads/racecar.zip" download class="btn btn-primary">下载游戏</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 游戏 5：ZZZ (绝区零风格小游戏集锦) -->
+            <div class="game-card" data-title="ZZZ" data-category="跑酷 剧情 战斗" data-status="published">
+                <img src="assets/images/zzz.png" alt="ZZZ Cover" class="card-cover-img">
+                <div class="card-content">
+                    <h2>ZZZ</h2>
+                    <p>绝区零风格小游戏集锦，富有挑战性。</p>
+                    <div class="actions">
+                        <a href="https://drive.google.com/uc?export=download&id=1K3ZExg3eFGngpBiqSQ1Y1tHGcHQIuuYn" target="_blank" class="btn btn-primary">下载游戏</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 游戏 6：Starrail -->
+            <div class="game-card" data-title="Starrail" data-category="回合制 战斗" data-status="published">
+                <img src="assets/images/Starrail.jpg" alt="Starrail Cover" class="card-cover-img">
+                <div class="card-content">
+                    <h2>Starrail</h2>
+                    <p>基于《崩坏：星穹铁道》世界观打造的 2D 二创回合制游戏。</p>
+                    <div class="actions">
+                        <!-- ⚠️ 已替换为 Google Drive 直接下载链接 -->
+                        <a href="https://drive.google.com/uc?export=download&id=17behXvdSyk-YuUEpkkfteKibXTQf7SaF" target="_blank" class="btn btn-primary">下载游戏</a>
                     </div>
                 </div>
             </div>
@@ -67,72 +221,67 @@
             <p>没有找到相关游戏</p>
         </div>
 
-        <footer class="site-footer">
-            <div class="footer-container">
-                <div class="footer-col">
-                    <h3>AW Games</h3>
-                    <p class="author-name">作者：AW</p>
-                    <p class="author-desc">独立游戏开发者。热爱编程与创造，致力于制作有趣、简单、纯粹的小游戏。</p>
-                </div>
-                <div class="footer-col">
-                    <h4>导航</h4>
-                    <ul class="footer-list">
-                        <li><a href="#">返回顶部</a></li>
-                        <li><a href="about.html">关于我</a></li>
-                        <li><a href="contact.html">联系作者</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>互动</h4>
-                    <ul class="footer-list">
-                        <li><a href="survey.html">问卷调查 (反馈)</a></li>
-                        <li><a href="https://github.com/aw-gd/AWGames" target="_blank">GitHub 仓库 ↗</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 AW Games. All rights reserved.</p>
-            </div>
-        </footer>
+    </div> <!-- page-wrapper 结束 -->
 
-    </div>
+    <!-- 统一 Footer 占位符 -->
+    <div id="footer-placeholder"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const searchInput = document.getElementById('search-input');
+            const statusBtns = document.querySelectorAll('.status-btn');
             const tabButtons = document.querySelectorAll('.tab-btn');
             const gameCards = document.querySelectorAll('.game-card');
             const emptyState = document.getElementById('empty-state');
 
-            let currentCategory = '全部';
-            let currentSearch = '';
+            let currentStatus = 'all'; // 状态筛选（all / published / unpublished）
+            let currentCategory = 'all'; // 分类筛选
+            let currentSearch = ''; // 搜索词
 
             function filterGames() {
                 let visibleCount = 0;
-
                 gameCards.forEach(card => {
                     const title = card.getAttribute('data-title').toLowerCase();
                     const category = card.getAttribute('data-category');
+                    const status = card.getAttribute('data-status');
+                    const categories = category ? category.split(' ') : [];
                     
-                    const matchCategory = (currentCategory === '全部' || category === currentCategory);
+                    // 1. 状态匹配
+                    const matchStatus = (currentStatus === 'all' || status === currentStatus);
+                    
+                    // 2. 分类匹配
+                    const matchCategory = (currentCategory === 'all' || categories.includes(currentCategory));
+                    
+                    // 3. 搜索匹配
                     const matchSearch = title.includes(currentSearch.toLowerCase());
 
-                    if (matchCategory && matchSearch) {
+                    if (matchStatus && matchCategory && matchSearch) {
                         card.style.display = 'flex';
                         visibleCount++;
                     } else {
                         card.style.display = 'none';
                     }
                 });
-
                 emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
             }
 
+            // 搜索事件
             searchInput.addEventListener('input', (e) => {
                 currentSearch = e.target.value.trim();
                 filterGames();
             });
 
+            // 状态切换事件
+            statusBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    statusBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentStatus = btn.getAttribute('data-status');
+                    filterGames();
+                });
+            });
+
+            // 分类切换事件
             tabButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
                     tabButtons.forEach(b => b.classList.remove('active'));
@@ -143,5 +292,8 @@
             });
         });
     </script>
+    
+    <!-- 引入 Footer 脚本 -->
+    <script src="footer.js"></script>
 </body>
 </html>
