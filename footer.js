@@ -18,9 +18,8 @@ function renderFooter(lang) {
                 <div class="footer-col">
                     <h4>${dict.footer_nav || "导航"}</h4>
                     <ul class="footer-list">
-                        <!-- 改回 index.html -->
+                        <!-- 移除了“支持我” -->
                         <li><a href="index.html">${dict.footer_home || "返回主页"}</a></li>
-                        <li><a href="support.html">${dict.support_title || "支持我"}</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
