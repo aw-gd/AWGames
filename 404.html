@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - 迷路了 - AW Games</title>
+    <!-- 注意这里把绝对路径 /AWGames/style.css 改成了相对路径 style.css -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fbfbfd;
+            margin: 0;
+            text-align: center;
+            font-family: -apple-system, sans-serif;
+        }
+        .error-container { padding: 40px; }
+        .error-code {
+            font-size: 120px;
+            font-weight: 800;
+            color: #0071e3;
+            line-height: 1;
+            margin-bottom: 20px;
+            letter-spacing: -0.05em;
+            text-shadow: 0 10px 30px rgba(0, 113, 227, 0.2);
+        }
+        .error-msg {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 12px;
+        }
+        .error-desc {
+            font-size: 16px;
+            color: #86868b;
+            margin-bottom: 40px;
+        }
+        .home-btn {
+            display: inline-block;
+            background-color: #0071e3;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 14px 36px;
+            border-radius: 99px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .home-btn:hover {
+            background-color: #0077ed;
+            box-shadow: 0 4px 15px rgba(0, 113, 227, 0.4);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <div class="error-msg" id="msg">你似乎迷失在了代码世界里...</div>
+        <div class="error-desc" id="desc">找不到你要找的页面。也许它还在开发中，或者链接错了。</div>
+        <!-- 改回 index.html -->
+        <a href="index.html" class="home-btn" id="btn">回城（返回主页）</a>
+    </div>
+
+    <script>
+        const lang = localStorage.getItem('site-lang') || 'zh-CN';
+        const msg = document.getElementById('msg');
+        const desc = document.getElementById('desc');
+        const btn = document.getElementById('btn');
+
+        if (lang === 'en') {
+            msg.innerText = "You seem lost in the code world...";
+            desc.innerText = "Page not found. Maybe it's still in development or the link is broken.";
+            btn.innerText = "Respawn (Home)";
+        } else if (lang === 'zh-TW') {
+            msg.innerText = "你似乎迷失在了程式碼世界裡...";
+            desc.innerText = "找不到你要找的頁面。也許它還在開發中，或者連結錯了。";
+            btn.innerText = "回城（返回主頁）";
+        }
+    </script>
+</body>
+</html>

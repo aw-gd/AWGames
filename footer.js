@@ -1,35 +1,48 @@
 // footer.js
-document.addEventListener("DOMContentLoaded", function() {
+function renderFooter(lang) {
     const footerPlaceholder = document.getElementById('footer-placeholder');
-    
-    if (footerPlaceholder) {
-        footerPlaceholder.innerHTML = `
-            <footer class="site-footer">
-                <div class="footer-container">
-                    <div class="footer-col">
-                        <h3>AW Games</h3>
-                        <p class="author-name">作者：AW</p>
-                        <p class="author-desc">独立游戏开发者。热爱编程与创造，致力于制作有趣、简单、纯粹的小游戏。</p>
-                    </div>
-                    <div class="footer-col">
-                        <h4>导航</h4>
-                        <ul class="footer-list">
-                            <li><a href="index.html">返回主页</a></li>
-                            <li><a href="mailto:antw6426@gmail.com">联系作者</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>互动</h4>
-                        <ul class="footer-list">
-                            <li><a href="survey.html">问卷调查</a></li>
-                            <li><a href="https://github.com/aw-gd/AWGames" target="_blank">GitHub 仓库 ↗</a></li>
-                        </ul>
-                    </div>
+    if (!footerPlaceholder) return;
+
+    const dict = (typeof translations !== 'undefined' && translations[lang]) 
+        ? translations[lang] 
+        : (typeof translations !== 'undefined' ? translations['zh-CN'] : {});
+
+    footerPlaceholder.innerHTML = `
+        <footer class="site-footer">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>AW Games</h3>
+                    <p class="author-name">${dict.footer_author || "作者：AW"}</p>
+                    <p class="author-desc">${dict.footer_desc || "独立游戏开发者，致力于把灵机一动的想法写进游戏。"}</p>
                 </div>
-                <div class="footer-bottom">
-                    <p>&copy; 2024 AW Games. All rights reserved.</p>
+                <div class="footer-col">
+                    <h4>${dict.footer_nav || "导航"}</h4>
+                    <ul class="footer-list">
+                        <!-- 改回 index.html -->
+                        <li><a href="index.html">${dict.footer_home || "返回主页"}</a></li>
+                        <li><a href="support.html">${dict.support_title || "支持我"}</a></li>
+                    </ul>
                 </div>
-            </footer>
-        `;
-    }
+                <div class="footer-col">
+                    <h4>${dict.footer_interact || "互动"}</h4>
+                    <ul class="footer-list">
+                        <li><a href="survey.html">${dict.footer_survey || "问卷调查"}</a></li>
+                        <li><a href="mailto:antw6426@gmail.com">${dict.footer_contact || "联系作者"}</a></li>
+                        <li><a href="https://space.bilibili.com/1385308308" target="_blank">Bilibili ↗</a></li>
+                        <li><a href="https://github.com/aw-gd/AWGames" target="_blank">GitHub ↗</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>${dict.footer_rights || "&copy; 2026 AW Games. All rights reserved."}</p>
+            </div>
+        </footer>
+    `;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+        const currentLang = localStorage.getItem('site-lang') || 'zh-CN';
+        renderFooter(currentLang);
+    }, 50);
 });

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>支持我 - AW Games</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="i18n.js" defer></script>
+    <style>
+        /* 专属样式 */
+        .support-container {
+            max-width: 600px;
+            width: 100%;
+            background: #ffffff;
+            padding: 48px;
+            border-radius: 28px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            margin: 60px auto;
+            text-align: center;
+        }
+        .support-container h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #1d1d1f;
+        }
+        .support-container p {
+            color: #86868b;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+        .support-card {
+            background-color: #f5f5f7;
+            padding: 32px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+        }
+        .support-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #1d1d1f;
+        }
+        .bili-btn {
+            display: inline-block;
+            background-color: #fb7299; /* B站粉 */
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 32px;
+            border-radius: 99px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .bili-btn:hover {
+            background-color: #fc8bab;
+            box-shadow: 0 4px 12px rgba(251, 114, 153, 0.3);
+        }
+        /* 语言切换器 */
+        .lang-switch-group { display: flex; align-items: center; background-color: rgba(0, 0, 0, 0.04); padding: 3px; border-radius: 99px; gap: 2px; }
+        .lang-btn { background: transparent; border: none; padding: 4px 12px; font-size: 12px; font-family: inherit; font-weight: 500; color: #86868b; border-radius: 99px; cursor: pointer; transition: all 0.3s ease; }
+        .lang-btn:hover { color: #1d1d1f; }
+        .lang-btn.active { background-color: #ffffff; color: #1d1d1f; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="./" class="nav-brand" data-i18n="nav_brand">AW Games</a>
+            <div class="nav-links" style="align-items: center;">
+                <div class="lang-switch-group" id="lang-switcher">
+                    <button class="lang-btn" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="zh-TW">繁</button>
+                    <button class="lang-btn active" data-lang="zh-CN">简</button>
+                </div>
+                <a href="https://github.com/aw-gd/AWGames" target="_blank" data-i18n="nav_github" style="margin-left: 8px;">GitHub</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="support-container">
+            <h1 data-i18n="support_title">支持我</h1>
+            <p data-i18n="support_desc">你的每一份支持，都是 AW 继续创造世界的动力。</p>
+            
+            <div class="support-card">
+                <h3 data-i18n="support_bili_title">关注我的 B 站</h3>
+                <p data-i18n="support_bili_desc">在这里可以看到开发日志、游戏预告和实况。</p>
+                <a href="https://space.bilibili.com/1385308308" target="_blank" class="bili-btn" data-i18n="support_bili_btn">前往 Bilibili ↗</a>
+            </div>
+
+            <!-- 如果你以后有赞助码，可以在这里加一个 <img> -->
+            <!-- 
+            <div class="support-card">
+                <h3>请我喝杯咖啡</h3>
+                <img src="assets/images/qr.png" style="width: 200px; border-radius: 12px;">
+            </div> 
+            -->
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="footer.js"></script>
+</body>
+</html>
