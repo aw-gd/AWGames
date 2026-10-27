@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="i18n.js" defer></script>
     <style>
-        /* 长文案微调 */
+        /* 针对长文案微调 */
         .subtitle {
             font-size: 18px;
             letter-spacing: 0.02em;
@@ -60,7 +60,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        /* ⚠️ 极简语言切换器专属样式 */
+        /* 极简语言切换器 */
         .lang-switch-group {
             display: flex;
             align-items: center;
@@ -69,7 +69,6 @@
             border-radius: 99px;
             gap: 2px;
         }
-
         .lang-btn {
             background: transparent;
             border: none;
@@ -82,11 +81,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
-        .lang-btn:hover {
-            color: #1d1d1f;
-        }
-
+        .lang-btn:hover { color: #1d1d1f; }
         .lang-btn.active {
             background-color: #ffffff;
             color: #1d1d1f;
@@ -106,7 +101,6 @@
         <div class="nav-content">
             <a href="index.html" class="nav-brand" data-i18n="nav_brand">AW Games</a>
             <div class="nav-links" style="align-items: center;">
-                <!-- ⚠️ 新的语言切换器 -->
                 <div class="lang-switch-group" id="lang-switcher">
                     <button class="lang-btn" data-lang="en">EN</button>
                     <button class="lang-btn" data-lang="zh-TW">繁</button>
@@ -171,7 +165,8 @@
 
             <!-- 游戏 2：Savior -->
             <div class="game-card" data-title="Savior" data-category="战斗" data-status="unpublished">
-                <img src="assets/images/savior.png" alt="Savior Cover" class="card-cover-img">
+                <!-- ⚠️ 这里已改为 Savior.png -->
+                <img src="assets/images/Savior.png" alt="Savior Cover" class="card-cover-img">
                 <div class="card-content">
                     <h2 data-i18n="game_savior_title">Savior</h2>
                     <p data-i18n="game_savior_desc">2D 平面战斗游戏。目前正在优化核心手感，敬请期待。</p>
@@ -239,7 +234,6 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        // 游戏过滤逻辑
         document.addEventListener('DOMContentLoaded', () => {
             const searchInput = document.getElementById('search-input');
             const statusBtns = document.querySelectorAll('.status-btn');
