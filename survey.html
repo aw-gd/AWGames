@@ -5,8 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>问卷调查 - AW Games</title>
     <link rel="stylesheet" href="style.css">
+    <script src="i18n.js" defer></script>
     <style>
-        /* 针对问卷页面的专属样式 */
+        /* 顶部语言切换器样式（与主页一致） */
+        .lang-switch-group {
+            display: flex;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.04);
+            padding: 3px;
+            border-radius: 99px;
+            gap: 2px;
+        }
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-family: inherit;
+            font-weight: 500;
+            color: #86868b;
+            border-radius: 99px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .lang-btn:hover { color: #1d1d1f; }
+        .lang-btn.active {
+            background-color: #ffffff;
+            color: #1d1d1f;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        }
+
+        /* 问卷专属样式 */
         .survey-container {
             max-width: 600px;
             width: 100%;
@@ -131,9 +160,15 @@
 
     <nav class="navbar">
         <div class="nav-content">
-            <a href="index.html" class="nav-brand">AW Games</a>
-            <div class="nav-links">
-                <a href="https://github.com/aw-gd/AWGames" target="_blank">GitHub</a>
+            <a href="index.html" class="nav-brand" data-i18n="nav_brand">AW Games</a>
+            <div class="nav-links" style="align-items: center;">
+                <!-- 语言切换器 -->
+                <div class="lang-switch-group" id="lang-switcher">
+                    <button class="lang-btn" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="zh-TW">繁</button>
+                    <button class="lang-btn active" data-lang="zh-CN">简</button>
+                </div>
+                <a href="https://github.com/aw-gd/AWGames" target="_blank" data-i18n="nav_github" style="margin-left: 8px;">GitHub</a>
             </div>
         </div>
     </nav>
@@ -141,73 +176,75 @@
     <div class="page-wrapper">
         
         <div class="survey-container">
-            <h1>游戏反馈问卷</h1>
-            <p class="desc">您的反馈对 AW 非常重要，感谢您的支持！</p>
+            <h1 data-i18n="survey_title">游戏反馈问卷</h1>
+            <p class="desc" data-i18n="survey_desc">您的反馈对 AW 非常重要，感谢您的支持！</p>
 
             <form id="surveyForm">
                 
                 <div class="form-group">
-                    <label for="gameSelect">选择玩了的游戏</label>
+                    <label for="gameSelect" data-i18n="survey_game_label">选择玩了的游戏</label>
                     <select id="gameSelect" class="form-control" required>
-                        <option value="" disabled selected>请选择一款游戏</option>
-                        <option value="Racecar">Racecar</option>
+                        <option value="" disabled selected data-i18n="survey_game_placeholder">请选择一款游戏</option>
+                        <option value="Re:Zero">Re:Zero</option>
                         <option value="Savior">Savior</option>
-                        <!-- ⚠️ 新增：Starrail -->
+                        <option value="冲，跳，射">Dash, Jump, Shoot</option>
+                        <option value="Racecar">Racecar</option>
+                        <option value="ZZZ">ZZZ</option>
                         <option value="Starrail">Starrail</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="playTime">填写游玩时长</label>
-                    <input type="text" id="playTime" class="form-control" placeholder="例如：2 小时 / 每天玩半小时" required>
+                    <label for="playTime" data-i18n="survey_time_label">填写游玩时长</label>
+                    <input type="text" id="playTime" class="form-control" placeholder="例如：2 小时 / 每天玩半小时" required data-i18n="survey_time_placeholder">
                 </div>
 
                 <div class="form-group" style="margin-top: 32px;">
-                    <label style="margin-bottom: 20px; font-size: 18px;">游戏评分 (1 - 10分)</label>
+                    <label style="margin-bottom: 20px; font-size: 18px;" data-i18n="survey_rating_title">游戏评分 (1 - 10分)</label>
                     
                     <div class="rating-group">
-                        <label for="scoreOverall">整体评分</label>
+                        <label for="scoreOverall" data-i18n="survey_score_overall">整体评分</label>
                         <input type="range" id="scoreOverall" class="rating-slider" min="1" max="10" value="8" oninput="document.getElementById('valOverall').innerText = this.value">
                         <span class="rating-value" id="valOverall">8</span>
                     </div>
 
                     <div class="rating-group">
-                        <label for="scoreGameplay">玩法评分</label>
+                        <label for="scoreGameplay" data-i18n="survey_score_gameplay">玩法评分</label>
                         <input type="range" id="scoreGameplay" class="rating-slider" min="1" max="10" value="8" oninput="document.getElementById('valGameplay').innerText = this.value">
                         <span class="rating-value" id="valGameplay">8</span>
                     </div>
 
                     <div class="rating-group">
-                        <label for="scoreContent">内容评分</label>
+                        <label for="scoreContent" data-i18n="survey_score_content">内容评分</label>
                         <input type="range" id="scoreContent" class="rating-slider" min="1" max="10" value="8" oninput="document.getElementById('valContent').innerText = this.value">
                         <span class="rating-value" id="valContent">8</span>
                     </div>
 
                     <div class="rating-group">
-                        <label for="scoreMusic">音乐评分</label>
+                        <label for="scoreMusic" data-i18n="survey_score_music">音乐评分</label>
                         <input type="range" id="scoreMusic" class="rating-slider" min="1" max="10" value="8" oninput="document.getElementById('valMusic').innerText = this.value">
                         <span class="rating-value" id="valMusic">8</span>
                     </div>
 
                     <div class="rating-group">
-                        <label for="scoreSFX">音效评分</label>
+                        <label for="scoreSFX" data-i18n="survey_score_sfx">音效评分</label>
                         <input type="range" id="scoreSFX" class="rating-slider" min="1" max="10" value="8" oninput="document.getElementById('valSFX').innerText = this.value">
                         <span class="rating-value" id="valSFX">8</span>
                     </div>
 
                     <div class="rating-group">
-                        <label for="scoreEasy">易玩程度</label>
+                        <label for="scoreEasy" data-i18n="survey_score_easy">易玩程度</label>
                         <input type="range" id="scoreEasy" class="rating-slider" min="1" max="10" value="8" oninput="document.getElementById('valEasy').innerText = this.value">
                         <span class="rating-value" id="valEasy">8</span>
                     </div>
                 </div>
 
                 <div class="form-group" style="margin-top: 32px;">
-                    <label for="otherFeedback">其他意见或建议</label>
-                    <textarea id="otherFeedback" class="form-control" placeholder="有任何想法、剧情讨论、Bug 反馈或建议，都可以写在这里..."></textarea>
+                    <label for="otherFeedback" data-i18n="survey_feedback_label">其他意见或建议</label>
+                    <textarea id="otherFeedback" class="form-control" placeholder="有任何想法、Bug反馈或建议，都可以写在这里..." data-i18n="survey_feedback_placeholder"></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-primary submit-btn">提交反馈</button>
+                <button type="submit" class="btn btn-primary submit-btn" data-i18n="survey_submit_btn">提交反馈</button>
             </form>
 
         </div>

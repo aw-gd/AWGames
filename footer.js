@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         <h4>导航</h4>
                         <ul class="footer-list">
                             <li><a href="index.html">返回主页</a></li>
-                            <li><a href="about.html">关于我</a></li>
                             <li><a href="mailto:antw6426@gmail.com">联系作者</a></li>
                         </ul>
                     </div>
@@ -28,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     </div>
                 </div>
                 <div class="footer-bottom">
-                    <p>&copy; 2026 AW Games. All rights reserved.</p>
+                    <p>&copy; 2024 AW Games. All rights reserved.</p>
                 </div>
             </footer>
         `;
